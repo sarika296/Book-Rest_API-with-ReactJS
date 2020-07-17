@@ -130,7 +130,7 @@ export default class Book extends Component {
                                 <Form.Group as={Col} controlId="formGridTitle">
                                     <Form.Label>Title</Form.Label>
                                     <Form.Control required autoComplete="off"
-                                                  type="test" name="title"
+                                                  type="text" name="title"
                                                   value={title} onChange={this.bookChange}
                                                   className={"bg-dark text-white"}
                                                   placeholder="Enter Book Title" />
@@ -138,7 +138,7 @@ export default class Book extends Component {
                                 <Form.Group as={Col} controlId="formGridAuthor">
                                     <Form.Label>Author</Form.Label>
                                     <Form.Control required autoComplete="off"
-                                                  type="test" name="author"
+                                                  type="text" name="author"
                                                   value={author} onChange={this.bookChange}
                                                   className={"bg-dark text-white"}
                                                   placeholder="Enter Book Author" />
@@ -148,7 +148,7 @@ export default class Book extends Component {
                                 <Form.Group as={Col} controlId="formGridCoverPhotoURL">
                                     <Form.Label>Cover Photo URL</Form.Label>
                                     <Form.Control required autoComplete="off"
-                                                  type="test" name="coverPhotoURL"
+                                                  type="text" name="coverPhotoURL"
                                                   value={coverPhotoURL} onChange={this.bookChange}
                                                   className={"bg-dark text-white"}
                                                   placeholder="Enter Book Cover Photo URL" />
@@ -156,7 +156,7 @@ export default class Book extends Component {
                                 <Form.Group as={Col} controlId="formGridISBNNumber">
                                     <Form.Label>ISBN Number</Form.Label>
                                     <Form.Control required autoComplete="off"
-                                                  type="test" name="isbnNumber"
+                                                  type="number" name="isbnNumber"
                                                   value={isbnNumber} onChange={this.bookChange}
                                                   className={"bg-dark text-white"}
                                                   placeholder="Enter Book ISBN Number" />
@@ -166,7 +166,7 @@ export default class Book extends Component {
                                 <Form.Group as={Col} controlId="formGridPrice">
                                     <Form.Label>Price</Form.Label>
                                     <Form.Control required autoComplete="off"
-                                                  type="test" name="price"
+                                                  type="number" name="price"
                                                   value={price} onChange={this.bookChange}
                                                   className={"bg-dark text-white"}
                                                   placeholder="Enter Book Price" />
@@ -174,7 +174,7 @@ export default class Book extends Component {
                                 <Form.Group as={Col} controlId="formGridLanguage">
                                     <Form.Label>Language</Form.Label>
                                     <Form.Control required autoComplete="off"
-                                                  type="test" name="language"
+                                                  type="text" name="language"
                                                   value={language} onChange={this.bookChange}
                                                   className={"bg-dark text-white"}
                                                   placeholder="Enter Book Language" />
