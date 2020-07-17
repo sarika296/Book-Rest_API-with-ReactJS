@@ -1,6 +1,7 @@
 import React from 'react';
 import {Container, Row, Col} from 'react-bootstrap';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
+
 import NavigationBar from './components/NavigationBar';
 import Welcome from './components/Welcome';
 import Book from './components/Book';
@@ -21,6 +22,7 @@ function App() {
                         <Switch>
                             <Route path="/" exact component={Welcome}/>
                             <Route path="/add" exact component={Book}/>
+                            <Route path="/edit/:id" exact component={Book}/>
                             <Route path="/list" exact component={BookList}/>
                         </Switch>
                     </Col>
