@@ -1,7 +1,6 @@
 import React from 'react';
 import {Container, Row, Col} from 'react-bootstrap';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
-
 import NavigationBar from './components/NavigationBar';
 import Welcome from './components/Welcome';
 import Book from './components/Book';
@@ -31,4 +30,5 @@ function App() {
         </Router>
     );
 }
-export default App
+
+export default App;
