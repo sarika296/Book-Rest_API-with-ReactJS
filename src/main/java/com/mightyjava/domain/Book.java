@@ -11,24 +11,27 @@ public class Book {
 	@Id
 	@GeneratedValue
 	private Long id;
-	
+
 	@NotNull
 	private String title;
-	
+
 	@NotNull
 	private String author;
-	
+
 	@NotNull
 	private String coverPhotoURL;
-	
+
 	@NotNull
 	private Long isbnNumber;
-	
+
 	@NotNull
 	private Double price;
-	
+
 	@NotNull
 	private String language;
+
+	@NotNull
+	private String genre;
 
 	public Long getId() {
 		return id;
@@ -86,4 +89,11 @@ public class Book {
 		this.language = language;
 	}
 
+	public String getGenre() {
+		return genre;
+	}
+
+	public void setGenre(String genre) {
+		this.genre = genre;
+	}
 }
