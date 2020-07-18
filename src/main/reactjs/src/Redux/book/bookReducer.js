@@ -1,31 +1,35 @@
-import { FETCH_BOOK_FAILURE, FETCH_BOOK_SUCCESS, FETCH_BOOK_REQUEST } from "./bookTypes";
+import {SAVE_BOOK_REQUEST, FETCH_BOOK_REQUEST, UPDATE_BOOK_REQUEST, BOOK_SUCCESS, BOOK_FAILURE} from "./bookTypes";
 
 const initialState = {
-    books: [],
-    err: ''
-}
+    book: '', error: ''
+};
 
-const bookReducer = (state = initialState, action) => {
-    switch(action.type)
-    {
-        case FETCH_BOOK_REQUEST:
-            return{
+const reducer = (state = initialState, action) => {
+    switch(action.type) {
+        case SAVE_BOOK_REQUEST:
+            return {
                 ...state
             };
-        case FETCH_BOOK_SUCCESS:
+        case FETCH_BOOK_REQUEST:
             return {
-                books: action.payload,
-                err: ''
+                ...state
             };
-        case FETCH_BOOK_FAILURE:
+        case UPDATE_BOOK_REQUEST:
             return {
-                books: [],
-                err: action.payload
+                ...state
             };
-
-        default:
-            return state
+        case BOOK_SUCCESS:
+            return {
+                book: action.payload,
+                error: ''
+            };
+        case BOOK_FAILURE:
+            return {
+                book: '',
+                error: action.payload
+            };
+        default: return state;
     }
-}
+};
 
-export default bookReducer;
+export default reducer;

@@ -1,35 +1,73 @@
-import { FETCH_BOOK_FAILURE, FETCH_BOOK_REQUEST, FETCH_BOOK_SUCCESS } from "./bookTypes";
-import axios from 'axios'
+import {SAVE_BOOK_REQUEST, FETCH_BOOK_REQUEST, UPDATE_BOOK_REQUEST, BOOK_SUCCESS, BOOK_FAILURE} from "./bookTypes";
+import axios from 'axios';
 
-export const fetchBooks = (bookId) => {
+export const saveBook = book => {
     return dispatch => {
-        dispatch(fetchBookRequest());
-        axios.get("http://localhost:8081/rest/books/"+bookId)
-            .then(res => {
-                dispatch(fetchBookSuccess(res.data));
+        dispatch(saveBookRequest());
+        axios.post("http://localhost:8081/rest/books", book)
+            .then(response => {
+                dispatch(bookSuccess(response.data));
             })
-            .catch(err => {
-                dispatch(fetchBookFailure(err.message));
+            .catch(error => {
+                dispatch(bookFailure(error));
             });
     };
 };
 
+const saveBookRequest = () => {
+    return {
+        type: SAVE_BOOK_REQUEST
+    };
+};
+
 const fetchBookRequest = () => {
-    return{
+    return {
         type: FETCH_BOOK_REQUEST
     };
 };
 
-const fetchBookSuccess = (users) => {
-    return{
-        type: FETCH_BOOK_SUCCESS,
-        payload: users
+export const fetchBook = bookId => {
+    return dispatch => {
+        dispatch(fetchBookRequest());
+        axios.get("http://localhost:8081/rest/books/"+bookId)
+            .then(response => {
+                dispatch(bookSuccess(response.data));
+            })
+            .catch(error => {
+                dispatch(bookFailure(error));
+            });
     };
 };
 
-const fetchBookFailure = (err) => {
-    return{
-        type: FETCH_BOOK_FAILURE,
-        payload: err
+const updateBookRequest = () => {
+    return {
+        type: UPDATE_BOOK_REQUEST
+    };
+};
+
+export const updateBook = book => {
+    return dispatch => {
+        dispatch(updateBookRequest());
+        axios.put("http://localhost:8081/rest/books", book)
+            .then(response => {
+                dispatch(bookSuccess(response.data));
+            })
+            .catch(error => {
+                dispatch(bookFailure(error));
+            });
+    };
+};
+
+const bookSuccess = book => {
+    return {
+        type: BOOK_SUCCESS,
+        payload: book
+    };
+};
+
+const bookFailure = error => {
+    return {
+        type: BOOK_FAILURE,
+        payload: error
     };
 };

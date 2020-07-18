@@ -1,5 +1,5 @@
- import React, {Component} from 'react';
-import '../style.css';
+import React, {Component} from 'react';
+import "../style.css";
 import {Card, Table, Image, ButtonGroup, Button, InputGroup, FormControl} from 'react-bootstrap';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faList, faEdit, faTrash, faStepBackward, faFastBackward, faStepForward, faFastForward, faSearch, faTimes} from '@fortawesome/free-solid-svg-icons';
@@ -7,7 +7,7 @@ import {Link} from 'react-router-dom';
 import MyToast from './MyToast';
 import axios from 'axios';
 
- export default class BookList extends Component {
+export default class BookList extends Component {
 
     constructor(props) {
         super(props);
@@ -16,14 +16,12 @@ import axios from 'axios';
             search : '',
             currentPage : 1,
             booksPerPage : 5,
-            sortToggle : true
+            sortDir: "asc"
         };
     }
 
     sortData = () => {
-        this.setState(state => ({
-            sortToggle : !state.sortToggle
-        }));
+        this.state.sortDir === "asc" ? this.setState({sortDir: "desc"}) : this.setState({sortDir: "asc"});
         this.findAllBooks(this.state.currentPage);
     }
 
@@ -31,10 +29,17 @@ import axios from 'axios';
         this.findAllBooks(this.state.currentPage);
     }
 
+    /*findAllBooks() {
+        fetch("http://localhost:8081/rest/books")
+            .then(response => response.json())
+            .then((data) => {
+                this.setState({books: data});
+            });
+    };*/
+
     findAllBooks(currentPage) {
         currentPage -= 1;
-        let sortDir = this.state.sortToggle ? "asc" : "desc";
-        axios.get("http://localhost:8081/rest/books?pageNumber="+currentPage+"&pageSize="+this.state.booksPerPage+"&sortBy=price&sortDir="+sortDir)
+        axios.get("http://localhost:8081/rest/books?pageNumber="+currentPage+"&pageSize="+this.state.booksPerPage+"&sortBy=price&sortDir="+this.state.sortDir)
             .then(response => response.data)
             .then((data) => {
                 this.setState({
@@ -45,6 +50,24 @@ import axios from 'axios';
                 });
             });
     };
+
+    /*deleteBook = (bookId) => {
+        fetch("http://localhost:8081/rest/books/"+bookId, {
+            method: 'DELETE'
+        })
+        .then(response => response.json())
+        .then((book) => {
+            if(book) {
+                this.setState({"show":true});
+                setTimeout(() => this.setState({"show":false}), 3000);
+                this.setState({
+                    books: this.state.books.filter(book => book.id !== bookId)
+                });
+            } else {
+                this.setState({"show":false});
+            }
+        });
+    };*/
 
     deleteBook = (bookId) => {
         axios.delete("http://localhost:8081/rest/books/"+bookId)
@@ -177,7 +200,7 @@ import axios from 'axios';
                                 <th>Title</th>
                                 <th>Author</th>
                                 <th>ISBN Number</th>
-                                <th onClick={this.sortData}>Price <div className={this.state.sortToggle ? "arrow arrow-down" : "arrow arrow-up"}> </div></th>
+                                <th onClick={this.sortData}>Price <div className={this.state.sortDir === "asc" ? "arrow arrow-down" : "arrow arrow-up"}> </div></th>
                                 <th>Language</th>
                                 <th>Genre</th>
                                 <th>Actions</th>
