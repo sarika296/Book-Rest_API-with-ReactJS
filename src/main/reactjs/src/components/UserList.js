@@ -4,7 +4,7 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faUsers, faStepBackward, faFastBackward, faStepForward, faFastForward} from '@fortawesome/free-solid-svg-icons';
 import "../style.css"
 import { connect } from 'react-redux'
-import {fetchUsers} from "../Redux/userActions";
+import {fetchUsers} from "../Redux/user/userActions";
 
 class UserList extends Component {
     constructor(props) {

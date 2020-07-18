@@ -8,8 +8,6 @@ import BookList from './components/BookList';
 import UserList from './components/UserList';
 import Footer from './components/Footer';
 import "./style.css"
-import store from "./Redux/store";
-import {Provider} from 'react-redux'
 
 export default function App() {
     const heading = "Welcome to Book Store";
@@ -27,8 +25,7 @@ export default function App() {
                             <Route path="/add" exact component={Book}/>
                             <Route path="/edit/:id" exact component={Book}/>
                             <Route path="/list" exact component={BookList}/>
-                            <Route path="/users" exact component={() =>
-                                <Provider store={store}><UserList/></Provider>}/>
+                            <Route path="/users" exact component={UserList}/>
                         </Switch>
                     </Col>
                 </Row>

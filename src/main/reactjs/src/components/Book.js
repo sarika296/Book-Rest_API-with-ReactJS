@@ -4,8 +4,10 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faSave, faPlusSquare, faUndo, faList, faEdit} from '@fortawesome/free-solid-svg-icons';
 import MyToast from './MyToast';
 import axios from 'axios';
+import {connect} from "react-redux";
+import { fetchBooks } from "../Redux/book/bookActions";
 
-export default class Book extends Component {
+class Book extends Component {
     constructor(props) {
         super(props);
         this.state = this.initialState;
@@ -58,23 +60,22 @@ export default class Book extends Component {
     };
 
     findBookById = (bookId) => {
-        axios.get("http://localhost:8081/rest/books/"+bookId)
-            .then(response => {
-                if(response.data != null) {
-                    this.setState({
-                        id: response.data.id,
-                        title: response.data.title,
-                        author: response.data.author,
-                        coverPhotoURL: response.data.coverPhotoURL,
-                        isbnNumber: response.data.isbnNumber,
-                        price: response.data.price,
-                        language: response.data.language,
-                        genre: response.data.genre
-                    });
-                }
-            }).catch((error) => {
-            console.error("Error - "+error);
-        });
+        this.props.fetchBooks(bookId);
+        setTimeout(() => {
+            let book = this.props.bookFetch.book;
+            if(book != null) {
+                this.setState({
+                    id: book.id,
+                    title: book.title,
+                    author: book.author,
+                    coverPhotoURL: book.coverPhotoURL,
+                    isbnNumber: book.isbnNumber,
+                    price: book.price,
+                    language: book.language,
+                    genre: book.genre
+                });
+            }
+        },1000)
     };
 
     resetBook = () => {
@@ -249,3 +250,18 @@ export default class Book extends Component {
         );
     }
 }
+
+
+const mapToStateProps = state => {
+    return{
+        bookFetch: state.book
+    }
+};
+
+const mapDispatchToProps = dispatch => {
+    return{
+        fetchBooks: (bookId) => dispatch(fetchBooks(bookId))
+    }
+};
+
+export default connect(mapToStateProps, mapDispatchToProps)(Book)
