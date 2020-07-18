@@ -1,4 +1,4 @@
-package com.mightyjava;
+package com.sarika;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

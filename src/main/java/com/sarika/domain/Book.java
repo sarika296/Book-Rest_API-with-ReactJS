@@ -1,4 +1,4 @@
-package com.mightyjava.domain;
+package com.sarika.domain;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

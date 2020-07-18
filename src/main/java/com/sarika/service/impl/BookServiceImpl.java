@@ -1,4 +1,4 @@
-package com.mightyjava.service.impl;
+package com.sarika.service.impl;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -8,9 +8,9 @@ import org.codehaus.jettison.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.mightyjava.domain.Book;
-import com.mightyjava.repository.BookRepository;
-import com.mightyjava.service.IService;
+import com.sarika.domain.Book;
+import com.sarika.repository.BookRepository;
+import com.sarika.service.IService;
 
 @Service
 public class BookServiceImpl implements IService<Book> {

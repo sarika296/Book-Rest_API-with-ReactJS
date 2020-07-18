@@ -1,4 +1,4 @@
-package com.mightyjava.resource.impl;
+package com.sarika.resource.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import com.mightyjava.domain.Book;
-import com.mightyjava.resource.Resource;
-import com.mightyjava.service.IService;
+import com.sarika.domain.Book;
+import com.sarika.resource.Resource;
+import com.sarika.service.IService;
 
 import java.util.Arrays;
 import java.util.Set;
