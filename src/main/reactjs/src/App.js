@@ -3,9 +3,9 @@ import {Container, Row, Col} from 'react-bootstrap';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import NavigationBar from './components/NavigationBar';
 import Welcome from './components/Welcome';
-import Book from './components/Book';
-import BookList from './components/BookList';
-import UserList from './components/UserList';
+import Book from './components/book/Book';
+import BookList from './components/book/BookList';
+import UserList from './components/user/UserList';
 import Footer from './components/Footer';
 import "./style.css"
 

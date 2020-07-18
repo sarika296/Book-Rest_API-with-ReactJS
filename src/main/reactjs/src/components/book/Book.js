@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {saveBook, fetchBook, updateBook} from '../Redux/index';
+import {saveBook, fetchBook, updateBook} from '../../Redux';
 import {Card, Form, Button, Col, InputGroup, Image} from 'react-bootstrap';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faSave, faPlusSquare, faUndo, faList, faEdit} from '@fortawesome/free-solid-svg-icons';
-import MyToast from './MyToast';
+import MyToast from '../MyToast';
 import axios from 'axios';
 
 class Book extends Component {
@@ -98,11 +98,11 @@ class Book extends Component {
         setTimeout(() => {
             if(this.props.savedBookObject.book != null) {
                 this.setState({"show":true, "method":"post"});
-                setTimeout(() => this.setState({"show":false}), 3000);
+                setTimeout(() => this.setState({"show":false}), 2000);
             } else {
                 this.setState({"show":false});
             }
-        }, 2000);
+        }, 1000);
 
         this.setState(this.initialState);
     };
@@ -124,11 +124,11 @@ class Book extends Component {
         setTimeout(() => {
             if(this.props.updatedBookObject.book != null) {
                 this.setState({"show":true, "method":"put"});
-                setTimeout(() => this.setState({"show":false}), 3000);
+                setTimeout(() => this.setState({"show":false}), 2000);
             } else {
                 this.setState({"show":false});
             }
-        }, 2000);
+        }, 1000);
 
         this.setState(this.initialState);
     };

@@ -2,9 +2,9 @@ import React, {Component} from 'react';
 import {Card, Table, InputGroup, Alert, FormControl, Button} from 'react-bootstrap';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faUsers, faStepBackward, faFastBackward, faStepForward, faFastForward} from '@fortawesome/free-solid-svg-icons';
-import "../style.css"
+import "../../style.css"
 import { connect } from 'react-redux'
-import {fetchUsers} from "../Redux/user/userActions";
+import {fetchUsers} from "../../Redux/index";
 
 class UserList extends Component {
     constructor(props) {
@@ -20,14 +20,6 @@ class UserList extends Component {
        // this.findAllRandomUsers();
         this.props.fetchUsers();
     }
-
-   /* findAllRandomUsers() {
-        axios.get("https://randomapi.com/api/6de6abfedb24f889e0b5f675edc50deb?fmt=raw&sole")
-            .then(response => response.data)
-            .then((data) => {
-                this.setState({users: data});
-            });
-    };*/
 
     changePage = event => {
         this.setState({

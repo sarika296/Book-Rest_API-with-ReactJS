@@ -13,6 +13,6 @@ import com.sarika.domain.Book;
 @Repository
 public interface BookRepository extends PagingAndSortingRepository<Book, Long> {
 
-    @Query("From Book b WHERE b.title=:searchText OR b.author=:searchText OR b.language=:searchText OR b.genre=:searchText ORDER BY b.price DESC")
+    @Query("From Book b WHERE b.title LIKE %:searchText% OR b.author LIKE %:searchText% OR b.language LIKE %:searchText% OR b.genre LIKE %:searchText% ORDER BY b.price DESC")
     Page<Book> findAllBooks(Pageable pageable, @Param("searchText") String searchText);
 }
