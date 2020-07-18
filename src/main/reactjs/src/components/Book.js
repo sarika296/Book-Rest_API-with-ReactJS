@@ -1,8 +1,6 @@
 import React, {Component} from 'react';
-
 import {connect} from 'react-redux';
 import {saveBook, fetchBook, updateBook} from '../Redux/index';
-
 import {Card, Form, Button, Col, InputGroup, Image} from 'react-bootstrap';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faSave, faPlusSquare, faUndo, faList, faEdit} from '@fortawesome/free-solid-svg-icons';
@@ -19,8 +17,6 @@ class Book extends Component {
             languages : [],
             show : false
         };
-        this.bookChange = this.bookChange.bind(this);
-        this.submitBook = this.submitBook.bind(this);
     }
 
     initialState = {
@@ -62,27 +58,6 @@ class Book extends Component {
             });
     };
 
-    /*findBookById = (bookId) => {
-        fetch("http://localhost:8081/rest/books/"+bookId)
-            .then(response => response.json())
-            .then((book) => {
-                if(book) {
-                    this.setState({
-                        id: book.id,
-                        title: book.title,
-                        author: book.author,
-                        coverPhotoURL: book.coverPhotoURL,
-                        isbnNumber: book.isbnNumber,
-                        price: book.price,
-                        language: book.language,
-                        genre: book.genre
-                    });
-                }
-            }).catch((error) => {
-                console.error("Error - "+error);
-            });
-    };*/
-
     findBookById = (bookId) => {
         this.props.fetchBook(bookId);
         setTimeout(() => {
@@ -100,58 +75,11 @@ class Book extends Component {
                 });
             }
         }, 1000);
-        /*axios.get("http://localhost:8081/rest/books/"+bookId)
-            .then(response => {
-                if(response.data != null) {
-                    this.setState({
-                        id: response.data.id,
-                        title: response.data.title,
-                        author: response.data.author,
-                        coverPhotoURL: response.data.coverPhotoURL,
-                        isbnNumber: response.data.isbnNumber,
-                        price: response.data.price,
-                        language: response.data.language,
-                        genre: response.data.genre
-                    });
-                }
-            }).catch((error) => {
-                console.error("Error - "+error);
-            });*/
     };
 
     resetBook = () => {
         this.setState(() => this.initialState);
     };
-
-    /*submitBook = event => {
-        event.preventDefault();
-        const book = {
-            title: this.state.title,
-            author: this.state.author,
-            coverPhotoURL: this.state.coverPhotoURL,
-            isbnNumber: this.state.isbnNumber,
-            price: this.state.price,
-            language: this.state.language,
-            genre: this.state.genre
-        };
-        const headers = new Headers();
-        headers.append('Content-Type', 'application/json');
-        fetch("http://localhost:8081/rest/books", {
-            method: 'POST',
-            body: JSON.stringify(book),
-            headers
-        })
-        .then(response => response.json())
-        .then((book) => {
-            if(book) {
-                this.setState({"show":true, "method":"post"});
-                setTimeout(() => this.setState({"show":false}), 3000);
-            } else {
-                this.setState({"show":false});
-            }
-        });
-        this.setState(this.initialState);
-    };*/
 
     submitBook = event => {
         event.preventDefault();
@@ -175,50 +103,9 @@ class Book extends Component {
                 this.setState({"show":false});
             }
         }, 2000);
-        /*axios.post("http://localhost:8081/rest/books", book)
-            .then(response => {
-                if(response.data != null) {
-                    this.setState({"show":true, "method":"post"});
-                    setTimeout(() => this.setState({"show":false}), 3000);
-                } else {
-                    this.setState({"show":false});
-                }
-            });*/
 
         this.setState(this.initialState);
     };
-
-    /*updateBook = event => {
-        event.preventDefault();
-        const book = {
-            id: this.state.id,
-            title: this.state.title,
-            author: this.state.author,
-            coverPhotoURL: this.state.coverPhotoURL,
-            isbnNumber: this.state.isbnNumber,
-            price: this.state.price,
-            language: this.state.language,
-            genre: this.state.genre
-        };
-        const headers = new Headers();
-        headers.append('Content-Type', 'application/json');
-        fetch("http://localhost:8081/rest/books", {
-            method: 'PUT',
-            body: JSON.stringify(book),
-            headers
-        })
-        .then(response => response.json())
-        .then((book) => {
-            if(book) {
-                this.setState({"show":true, "method":"put"});
-                setTimeout(() => this.setState({"show":false}), 3000);
-                setTimeout(() => this.bookList(), 3000);
-            } else {
-                this.setState({"show":false});
-            }
-        });
-        this.setState(this.initialState);
-    };*/
 
     updateBook = event => {
         event.preventDefault();
@@ -242,16 +129,7 @@ class Book extends Component {
                 this.setState({"show":false});
             }
         }, 2000);
-        /*axios.put("http://localhost:8081/rest/books", book)
-            .then(response => {
-                if(response.data != null) {
-                    this.setState({"show":true, "method":"put"});
-                    setTimeout(() => this.setState({"show":false}), 3000);
-                    setTimeout(() => this.bookList(), 3000);
-                } else {
-                    this.setState({"show":false});
-                }
-            });*/
+
         this.setState(this.initialState);
     };
 

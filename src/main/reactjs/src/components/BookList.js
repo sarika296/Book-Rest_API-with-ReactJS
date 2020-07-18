@@ -1,4 +1,6 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
+import {deleteBook} from '../Redux/index';
 import "../style.css";
 import {Card, Table, Image, ButtonGroup, Button, InputGroup, FormControl} from 'react-bootstrap';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
@@ -7,7 +9,7 @@ import {Link} from 'react-router-dom';
 import MyToast from './MyToast';
 import axios from 'axios';
 
-export default class BookList extends Component {
+class BookList extends Component {
 
     constructor(props) {
         super(props);
@@ -21,21 +23,15 @@ export default class BookList extends Component {
     }
 
     sortData = () => {
-        this.state.sortDir === "asc" ? this.setState({sortDir: "desc"}) : this.setState({sortDir: "asc"});
-        this.findAllBooks(this.state.currentPage);
-    }
+        setTimeout(() => {
+            this.state.sortDir === "asc" ? this.setState({sortDir: "desc"}) : this.setState({sortDir: "asc"});
+            this.findAllBooks(this.state.currentPage);
+        }, 500);
+    };
 
     componentDidMount() {
         this.findAllBooks(this.state.currentPage);
     }
-
-    /*findAllBooks() {
-        fetch("http://localhost:8081/rest/books")
-            .then(response => response.json())
-            .then((data) => {
-                this.setState({books: data});
-            });
-    };*/
 
     findAllBooks(currentPage) {
         currentPage -= 1;
@@ -51,37 +47,17 @@ export default class BookList extends Component {
             });
     };
 
-    /*deleteBook = (bookId) => {
-        fetch("http://localhost:8081/rest/books/"+bookId, {
-            method: 'DELETE'
-        })
-        .then(response => response.json())
-        .then((book) => {
-            if(book) {
+    deleteBook = (bookId) => {
+        this.props.deleteBook(bookId);
+        setTimeout(() => {
+            if(this.props.bookObject != null) {
                 this.setState({"show":true});
                 setTimeout(() => this.setState({"show":false}), 3000);
-                this.setState({
-                    books: this.state.books.filter(book => book.id !== bookId)
-                });
+                this.findAllBooks(this.state.currentPage);
             } else {
                 this.setState({"show":false});
             }
-        });
-    };*/
-
-    deleteBook = (bookId) => {
-        axios.delete("http://localhost:8081/rest/books/"+bookId)
-            .then(response => {
-                if(response.data != null) {
-                    this.setState({"show":true});
-                    setTimeout(() => this.setState({"show":false}), 3000);
-                    this.setState({
-                        books: this.state.books.filter(book => book.id !== bookId)
-                    });
-                } else {
-                    this.setState({"show":false});
-                }
-            });
+        }, 1000);
     };
 
     changePage = event => {
@@ -200,7 +176,7 @@ export default class BookList extends Component {
                                 <th>Title</th>
                                 <th>Author</th>
                                 <th>ISBN Number</th>
-                                <th onClick={this.sortData}>Price <div className={this.state.sortDir === "asc" ? "arrow arrow-down" : "arrow arrow-up"}> </div></th>
+                                <th onClick={this.sortData}>Price <div className={this.state.sortDir === "asc" ? "arrow arrow-up" : "arrow arrow-down"}> </div></th>
                                 <th>Language</th>
                                 <th>Genre</th>
                                 <th>Actions</th>
@@ -272,3 +248,17 @@ export default class BookList extends Component {
         );
     }
 }
+
+const mapStateToProps = state => {
+    return {
+        bookObject: state.book
+    };
+};
+
+const mapDispatchToProps = dispatch => {
+    return {
+        deleteBook: (bookId) => dispatch(deleteBook(bookId))
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(BookList);
