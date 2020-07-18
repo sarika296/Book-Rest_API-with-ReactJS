@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {Card, Table, InputGroup, Alert, FormControl, Button} from 'react-bootstrap';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faUsers, faStepBackward, faFastBackward, faStepForward, faFastForward} from '@fortawesome/free-solid-svg-icons';
-import "../../style.css"
+import "../../assets/style.css"
 import { connect } from 'react-redux'
 import {fetchUsers} from "../../Redux/index";
 

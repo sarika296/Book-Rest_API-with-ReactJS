@@ -7,7 +7,7 @@ import Book from './components/book/Book';
 import BookList from './components/book/BookList';
 import UserList from './components/user/UserList';
 import Footer from './components/Footer';
-import "./style.css"
+import "./assets/style.css"
 
 export default function App() {
     const heading = "Welcome to Book Store";
